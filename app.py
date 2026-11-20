@@ -22,7 +22,7 @@ try:
 except ImportError:
     HAS_PIL = False
 
-# Make high-DPI aware on Windows for crisp fonts and graphics
+#Make high-DPI aware on Windows for crisp fonts and graphics
 try:
     import ctypes
     ctypes.windll.shcore.SetProcessDpiAwareness(1)
