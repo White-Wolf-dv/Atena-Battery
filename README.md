@@ -1,7 +1,7 @@
 # 🔵 Atena Battery
 
 <p align="center">
-  <img src="app_icon.ico" width="80" height="80" alt="Atena Battery Overlay Icon" />
+  <img src="https://github.com/White-Wolf-dv/Atena-Battery/blob/main/app_icon.ico" width="80" height="80" alt="Atena Battery Overlay Icon" />
 </p>
 
 <p align="center">
