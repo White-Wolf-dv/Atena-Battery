@@ -1,2 +1,4 @@
 *.csproj linguist-language=C#
 *.csproj linguist-detectable=true
+*.xaml linguist-language=C#
+*.xaml linguist-detectable=true
