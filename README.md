@@ -44,7 +44,7 @@ This repository includes **two complete editions**:
 | **Legacy Device Support** | PnP + Registry + `Device Parameters` deep fallback | PnP + Registry fallback |
 | **Multi-Monitor Safety** | Automatic Virtual Screen boundary clamping | Basic coordinate restore |
 | **Single-Instance Guard** | Built-in `Global` Mutex | Manual |
-| **Packaging** | Portable `.exe` & Windows Installer (`Inno Setup`) | PyInstaller `.exe` or `run.bat` |
+| **Packaging** | Windows Installer  | PyInstaller `.exe` or `run.bat` |
 
 ---
 
