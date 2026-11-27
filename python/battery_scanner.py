@@ -13,7 +13,6 @@ POWERSHELL_SCRIPT = r"""
 $ErrorActionPreference = 'SilentlyContinue'
 $batteryKey = "{104EA319-6EE2-4701-BD47-8DDBF425BBE5} 2"
 
-# Scan Bluetooth, System, HIDClass, and Media devices (includes BTHENUM and BTHLE for 1% GATT battery)
 $devices = Get-PnpDevice -Status "OK" | Where-Object {
     $_.InstanceId -match "^(BTHENUM|BTHLE|BTHLEDEVICE|HID\\\{00001812)" -or
     ($_.Class -in @("Bluetooth", "System", "HIDClass", "Media", "AudioEndpoint") -and $_.InstanceId -match "BTH")
@@ -37,7 +36,6 @@ function Add-BatteryResult($rawName, $val) {
     if (-not $found.ContainsKey($name)) {
         $found[$name] = $level
     } else {
-        # Prefer 1%-granularity readings (non-multiples of 10) over coarse 10% HFP readings
         $existing = $found[$name]
         if (($existing % 10 -eq 0) -and ($level % 10 -ne 0)) {
             $found[$name] = $level
@@ -45,7 +43,6 @@ function Add-BatteryResult($rawName, $val) {
     }
 }
 
-# 1. Check DEVPKEY_Device_BatteryPercentage across all matched PnP nodes (Classic + BLE)
 foreach ($dev in $devices) {
     $prop = Get-PnpDeviceProperty -InstanceId $dev.InstanceId -KeyName $batteryKey
     if ($prop -and $null -ne $prop.Data) {
@@ -53,7 +50,6 @@ foreach ($dev in $devices) {
     }
 }
 
-# 2. Registry Fallback for BLE GATT & HID Peripherals
 $regPaths = @(
     "HKLM:\SYSTEM\CurrentControlSet\Enum\BTHLE",
     "HKLM:\SYSTEM\CurrentControlSet\Enum\BTHLEDevice",
