@@ -8,21 +8,18 @@ public sealed record BluetoothDevice(string Name, int Battery);
 
 public static partial class BatteryScanner
 {
-    // DEVPKEY_Device_BatteryPercentage: {104EA319-6EE2-4701-BD47-8DDBF425BBE5}, 2
     private static readonly DevPropKey DevPKeyBatteryPercentage = new()
     {
         FmtId = new Guid("104EA319-6EE2-4701-BD47-8DDBF425BBE5"),
         Pid = 2
     };
 
-    // DEVPKEY_Device_FriendlyName: {A45C254E-DF1C-4EFD-8020-67D146A850E0}, 14
     private static readonly DevPropKey DevPKeyFriendlyName = new()
     {
         FmtId = new Guid("A45C254E-DF1C-4EFD-8020-67D146A850E0"),
         Pid = 14
     };
 
-    // DEVPKEY_Device_DeviceDesc: {A45C254E-DF1C-4EFD-8020-67D146A850E0}, 2
     private static readonly DevPropKey DevPKeyDeviceDesc = new()
     {
         FmtId = new Guid("A45C254E-DF1C-4EFD-8020-67D146A850E0"),
@@ -67,10 +64,8 @@ public static partial class BatteryScanner
     {
         var found = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
-        // 1. Direct native PnP scan (Classic HFP, BLE GATT, and HID)
         ScanViaCfgMgr32(found);
 
-        // 2. Registry fallback for older devices/drivers (including Device Parameters)
         ScanViaRegistryFallback(found);
 
         return found
